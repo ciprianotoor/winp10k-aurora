@@ -1,0 +1,225 @@
+﻿{
+    "$schema":  "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "version":  4,
+    "blocks":  [
+                   {
+                       "type":  "prompt",
+                       "alignment":  "left",
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "╭─ "
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#EAF2FF",
+                                            "template":  "\u003c#FFFFFF\u003eUC:\u003c/\u003e \u003c#AF87D7\u003e{{ .Env.POSH_LAST_COMMAND }}\u003c/\u003e"
+                                        }
+                                    ]
+                   },
+                   {
+                       "type":  "prompt",
+                       "alignment":  "right",
+                       "segments":  [
+                                        {
+                                            "type":  "status",
+                                            "style":  "plain",
+                                            "foreground":  "#F87171",
+                                            "template":  "{{ if .Error }}✘ {{ .Code }}  {{ end }}"
+                                        },
+                                        {
+                                            "type":  "executiontime",
+                                            "style":  "plain",
+                                            "foreground":  "#A8C5EA",
+                                            "template":  "took {{ .FormattedMs }}  ",
+                                            "options":  {
+                                                            "threshold":  3000,
+                                                            "style":  "round"
+                                                        }
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#93C5FD",
+                                            "template":  "{{ if gt .Jobs 0 }}✦ {{ .Jobs }} jobs  {{ end }}"
+                                        },
+                                        {
+                                            "type":  "time",
+                                            "style":  "plain",
+                                            "foreground":  "#7DD3FC",
+                                            "template":  "a las {{ .CurrentDate | date .Format }}  ",
+                                            "options":  {
+                                                            "time_format":  "03:04:05 PM"
+                                                        }
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "─╮"
+                                        }
+                                    ]
+                   },
+                   {
+                       "type":  "prompt",
+                       "alignment":  "left",
+                       "newline":  true,
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "├─ "
+                                        },
+                                        {
+                                            "type":  "os",
+                                            "style":  "plain",
+                                            "foreground":  "#FFFFFF",
+                                            "template":  "{{ .Icon }} "
+                                        },
+                                        {
+                                            "type":  "git",
+                                            "style":  "plain",
+                                            "foreground":  "#60A5FA",
+                                            "foreground_templates":  [
+                                                                         "{{ if or (.Working.Changed) (.Staging.Changed) }}#FBBF24{{ end }}",
+                                                                         "{{ if or (gt .Ahead 0) (gt .Behind 0) }}#60A5FA{{ end }}"
+                                                                     ],
+                                            "template":  " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}",
+                                            "options":  {
+                                                            "fetch_status":  true,
+                                                            "fetch_upstream_icon":  true
+                                                        }
+                                        }
+                                    ]
+                   },
+                   {
+                       "type":  "prompt",
+                       "alignment":  "right",
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#67E8F9",
+                                            "template":  "{{ if .Env.IP_LOCAL }}LAN: {{ .Env.IP_LOCAL }}{{ end }}  "
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "─┤"
+                                        }
+                                    ]
+                   },
+                   {
+                       "type":  "prompt",
+                       "alignment":  "left",
+                       "newline":  true,
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "├─ "
+                                        },
+                                        {
+                                            "type":  "path",
+                                            "style":  "plain",
+                                            "foreground":  "#BFDBFE",
+                                            "template":  "{{ .Path }}",
+                                            "options":  {
+                                                            "style":  "folder",
+                                                            "folder_separator_icon":  " / "
+                                                        }
+                                        },
+                                        {
+                                            "type":  "winget",
+                                            "style":  "plain",
+                                            "foreground":  "#EAF2FF",
+                                            "template":  " 󰏖 {{ .UpdateCount }}"
+                                        },
+                                        {
+                                            "type":  "battery",
+                                            "style":  "plain",
+                                            "foreground":  "#FBBF24",
+                                            "template":  " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}%{{ end }}",
+                                            "options":  {
+                                                            "charging_icon":  "󰂄",
+                                                            "discharging_icon":  "󰁽",
+                                                            "charged_icon":  "󰁹",
+                                                            "not_charging_icon":  "󰚥"
+                                                        }
+                                        },
+                                        {
+                                            "type":  "sysinfo",
+                                            "style":  "plain",
+                                            "foreground":  "#7DD3FC",
+                                            "template":  "  RAM {{ round .PhysicalPercentUsed .Precision }}%"
+                                        }
+                                    ]
+                   },
+                   {
+                       "type":  "prompt",
+                       "alignment":  "right",
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#67E8F9",
+                                            "template":  "{{ if .Env.IP_TAILSCALE }}TS: {{ .Env.IP_TAILSCALE }}  {{ end }}"
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "─┤"
+                                        }
+                                    ],
+                       "overflow":  "hide"
+                   },
+                   {
+                       "type":  "prompt",
+                       "alignment":  "left",
+                       "newline":  true,
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "╰─"
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground_templates":  [
+                                                                         "{{ if gt .Code 0 }}#F87171{{ else }}#4ADE80{{ end }}"
+                                                                     ],
+                                            "template":  "❯ "
+                                        }
+                                    ]
+                   },
+                   {
+                       "type":  "rprompt",
+                       "segments":  [
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground_templates":  [
+                                                                         "{{ if gt .Code 0 }}#F87171{{ else }}#4ADE80{{ end }}"
+                                                                     ],
+                                            "template":  "❮"
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "style":  "plain",
+                                            "foreground":  "#3B82F6",
+                                            "template":  "─╯"
+                                        }
+                                    ]
+                   }
+               ],
+    "final_space":  false
+}
