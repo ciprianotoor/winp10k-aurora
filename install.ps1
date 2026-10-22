@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 $ErrorActionPreference = 'Stop'
@@ -75,11 +75,11 @@ if ($settingsPath) {
             foreground = '#EAF2FF'
             cursorColor = '#FFFFFF'
             selectionBackground = '#264A78'
-            black = '#101827'; red = '#F87171'; green = '#4ADE80'; yellow = '#FBBF24'
-            blue = '#60A5FA'; purple = '#C4B5FD'; cyan = '#67E8F9'; white = '#EAF2FF'
-            brightBlack = '#64748B'; brightRed = '#FCA5A5'; brightGreen = '#86EFAC'
-            brightYellow = '#FDE68A'; brightBlue = '#93C5FD'; brightPurple = '#DDD6FE'
-            brightCyan = '#A5F3FC'; brightWhite = '#FFFFFF'
+            black = '#101827'; red = '#FF3B30'; green = '#00E676'; yellow = '#FFD740'
+            blue = '#0078D4'; purple = '#C4B5FD'; cyan = '#00E5FF'; white = '#EAF2FF'
+            brightBlack = '#64748B'; brightRed = '#FF6B6B'; brightGreen = '#69F0AE'
+            brightYellow = '#FFE57F'; brightBlue = '#40A9FF'; brightPurple = '#DDD6FE'
+            brightCyan = '#84FFFF'; brightWhite = '#FFFFFF'
         }
         $settings.schemes = @($settings.schemes | Where-Object { $_.name -ne $scheme.name }) + @($scheme)
         if (-not $settings.profiles) { $settings.profiles = @{} }
@@ -97,3 +97,4 @@ if ($settingsPath) {
 }
 
 Write-Host 'Instalación lista. Reinicia Windows Terminal para cargar el tema y la fuente.'
+

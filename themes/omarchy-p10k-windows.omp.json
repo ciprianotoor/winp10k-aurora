@@ -9,14 +9,14 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "╭─ "
                                         },
                                         {
                                             "type":  "text",
                                             "style":  "plain",
                                             "foreground":  "#EAF2FF",
-                                            "template":  "\u003c#FFFFFF\u003eUC:\u003c/\u003e \u003c#AF87D7\u003e{{ .Env.POSH_LAST_COMMAND }}\u003c/\u003e"
+                                            "template":  "\u003c#FFFFFF\u003eUC:\u003c/\u003e \u003c#7CC7FF\u003e{{ .Env.POSH_LAST_COMMAND }}\u003c/\u003e"
                                         }
                                     ]
                    },
@@ -27,13 +27,13 @@
                                         {
                                             "type":  "status",
                                             "style":  "plain",
-                                            "foreground":  "#F87171",
+                                            "foreground":  "#FF3B30",
                                             "template":  "{{ if .Error }}✘ {{ .Code }}  {{ end }}"
                                         },
                                         {
                                             "type":  "executiontime",
                                             "style":  "plain",
-                                            "foreground":  "#A8C5EA",
+                                            "foreground":  "#CBD5E1",
                                             "template":  "took {{ .FormattedMs }}  ",
                                             "options":  {
                                                             "threshold":  3000,
@@ -43,7 +43,7 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#93C5FD",
+                                            "foreground":  "#7CC7FF",
                                             "template":  "{{ if gt .Jobs 0 }}✦ {{ .Jobs }} jobs  {{ end }}"
                                         },
                                         {
@@ -58,7 +58,7 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "─╮"
                                         }
                                     ]
@@ -71,7 +71,7 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "├─ "
                                         },
                                         {
@@ -83,10 +83,10 @@
                                         {
                                             "type":  "git",
                                             "style":  "plain",
-                                            "foreground":  "#60A5FA",
+                                            "foreground":  "#00E676",
                                             "foreground_templates":  [
-                                                                         "{{ if or (.Working.Changed) (.Staging.Changed) }}#FBBF24{{ end }}",
-                                                                         "{{ if or (gt .Ahead 0) (gt .Behind 0) }}#60A5FA{{ end }}"
+                                                                         "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFD740{{ end }}",
+                                                                         "{{ if or (gt .Ahead 0) (gt .Behind 0) }}#00E676{{ end }}"
                                                                      ],
                                             "template":  " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}",
                                             "options":  {
@@ -103,13 +103,13 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#67E8F9",
+                                            "foreground":  "#00E5FF",
                                             "template":  "{{ if .Env.IP_LOCAL }}LAN: {{ .Env.IP_LOCAL }}{{ end }}  "
                                         },
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "─┤"
                                         }
                                     ]
@@ -122,13 +122,13 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "├─ "
                                         },
                                         {
                                             "type":  "path",
                                             "style":  "plain",
-                                            "foreground":  "#BFDBFE",
+                                            "foreground":  "#78BFFF",
                                             "template":  "{{ .Path }}",
                                             "options":  {
                                                             "style":  "folder",
@@ -144,7 +144,7 @@
                                         {
                                             "type":  "battery",
                                             "style":  "plain",
-                                            "foreground":  "#FBBF24",
+                                            "foreground":  "#FFD740",
                                             "template":  " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}%{{ end }}",
                                             "options":  {
                                                             "charging_icon":  "󰂄",
@@ -168,13 +168,13 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#67E8F9",
+                                            "foreground":  "#00E5FF",
                                             "template":  "{{ if .Env.IP_TAILSCALE }}TS: {{ .Env.IP_TAILSCALE }}  {{ end }}"
                                         },
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "─┤"
                                         }
                                     ],
@@ -188,14 +188,14 @@
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "╰─"
                                         },
                                         {
                                             "type":  "text",
                                             "style":  "plain",
                                             "foreground_templates":  [
-                                                                         "{{ if gt .Code 0 }}#F87171{{ else }}#4ADE80{{ end }}"
+                                                                         "{{ if gt .Code 0 }}#FF3B30{{ else }}#00E676{{ end }}"
                                                                      ],
                                             "template":  "❯ "
                                         }
@@ -208,14 +208,14 @@
                                             "type":  "text",
                                             "style":  "plain",
                                             "foreground_templates":  [
-                                                                         "{{ if gt .Code 0 }}#F87171{{ else }}#4ADE80{{ end }}"
+                                                                         "{{ if gt .Code 0 }}#FF3B30{{ else }}#00E676{{ end }}"
                                                                      ],
                                             "template":  "❮"
                                         },
                                         {
                                             "type":  "text",
                                             "style":  "plain",
-                                            "foreground":  "#3B82F6",
+                                            "foreground":  "#0078D4",
                                             "template":  "─╯"
                                         }
                                     ]
@@ -223,3 +223,4 @@
                ],
     "final_space":  false
 }
+
