@@ -1,4 +1,4 @@
-# Omarchy P10k Windows: información opcional mostrada por el tema.
+﻿# WinP10k Aurora: información opcional mostrada por el tema.
 # Se mantiene separado del perfil personal del usuario.
 $lan = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
     Where-Object {
@@ -16,4 +16,5 @@ $tail = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
 $env:IP_LOCAL = if ($lan) { $lan } else { '' }
 $env:IP_TAILSCALE = if ($tail) { $tail } else { '' }
 
-oh-my-posh init pwsh --config "$HOME\.poshthemes\omarchy-p10k-windows.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$HOME\.poshthemes\winp10k-aurora.omp.json" | Invoke-Expression
+

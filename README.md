@@ -1,4 +1,4 @@
-# Omarchy P10k Windows
+﻿# WinP10k Aurora
 
 Tema de Oh My Posh para PowerShell y Windows Terminal, inspirado en la estructura de Powerlevel10k y adaptado a una paleta azul y blanca.
 
@@ -24,12 +24,13 @@ Para actualizar, ejecuta de nuevo el instalador. Para desinstalar la inicializac
 
 ## Personalización
 
-Edita themes/omarchy-p10k-windows.omp.json. Para cambiar LAN/Tailscale u otros datos, edita el bloque señalado en profile/OhMyPosh.Windows.ps1. El perfil agregado es independiente: no reemplaza el perfil personal ni sus funciones.
+Edita themes/winp10k-aurora.omp.json. Para cambiar LAN/Tailscale u otros datos, edita el bloque señalado en profile/WinP10k-Aurora.ps1. El perfil agregado es independiente: no reemplaza el perfil personal ni sus funciones.
 
 ## Desarrollo
 
-Los cambios al tema se copian al destino %USERPROFILE%\\.poshthemes\\omarchy-p10k-windows.omp.json. Valida JSON con ConvertFrom-Json y revisa la representación en una sesión de PowerShell 7 antes de publicar cambios.
+Los cambios al tema se copian al destino %USERPROFILE%\\.poshthemes\\winp10k-aurora.omp.json. Valida JSON con ConvertFrom-Json y revisa la representación en una sesión de PowerShell 7 antes de publicar cambios.
 
 ## Créditos
 
 Diseño original basado en el tema personalizado de Powerlevel10k del usuario; configuración de prompt implementada para Oh My Posh. Oh My Posh y Meslo Nerd Font son proyectos de terceros con sus propias licencias.
+

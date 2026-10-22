@@ -3,13 +3,17 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $repo = $PSScriptRoot
-$themeSource = Join-Path $repo 'themes\omarchy-p10k-windows.omp.json'
-$profileSource = Join-Path $repo 'profile\OhMyPosh.Windows.ps1'
+$themeSource = Join-Path $repo 'themes\winp10k-aurora.omp.json'
+$profileSource = Join-Path $repo 'profile\WinP10k-Aurora.ps1'
 $themeDir = Join-Path $HOME '.poshthemes'
-$themeTarget = Join-Path $themeDir 'omarchy-p10k-windows.omp.json'
-$profileTarget = Join-Path $themeDir 'OhMyPosh.Windows.ps1'
-$managedStart = '# >>> Omarchy P10k Windows >>>'
-$managedEnd = '# <<< Omarchy P10k Windows <<<'
+$themeTarget = Join-Path $themeDir 'winp10k-aurora.omp.json'
+$profileTarget = Join-Path $themeDir 'WinP10k-Aurora.ps1'
+$managedStart = '# >>> WinP10k Aurora >>>'
+$managedEnd = '# <<< WinP10k Aurora <<<'
+$managedBlocks = @(
+    [PSCustomObject]@{ Start = $managedStart; End = $managedEnd }
+    [PSCustomObject]@{ Start = '# >>> Omarchy P10k Windows >>>'; End = '# <<< Omarchy P10k Windows <<<' }
+)
 
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     throw 'Ejecuta este instalador desde PowerShell 7 (pwsh).'
@@ -37,11 +41,13 @@ if (Test-Path -LiteralPath $PROFILE) {
 } else {
     $profileText = ''
 }
-if ($profileText -match [regex]::Escape($managedStart)) {
-    $pattern = '(?s)' + [regex]::Escape($managedStart) + '.*?' + [regex]::Escape($managedEnd)
-    $profileText = [regex]::Replace($profileText, $pattern, '').TrimEnd()
+foreach ($managedBlock in $managedBlocks) {
+    if ($profileText -match [regex]::Escape($managedBlock.Start)) {
+        $pattern = '(?s)' + [regex]::Escape($managedBlock.Start) + '.*?' + [regex]::Escape($managedBlock.End)
+        $profileText = [regex]::Replace($profileText, $pattern, '').TrimEnd()
+    }
 }
-$profileBackup = "$PROFILE.omarchy-p10k.bak"
+$profileBackup = "$PROFILE.winp10k-aurora.bak"
 if (Test-Path -LiteralPath $PROFILE) {
     Copy-Item -LiteralPath $PROFILE -Destination $profileBackup -Force
 }
@@ -70,7 +76,7 @@ if ($settingsPath) {
         $settings = Get-Content -Raw -LiteralPath $settingsPath | ConvertFrom-Json -AsHashtable
         if (-not $settings.ContainsKey('schemes')) { $settings.schemes = @() }
         $scheme = @{
-            name = 'Omarchy Blue'
+            name = 'WinP10k Aurora'
             background = '#0B1220'
             foreground = '#EAF2FF'
             cursorColor = '#FFFFFF'
@@ -84,7 +90,7 @@ if ($settingsPath) {
         $settings.schemes = @($settings.schemes | Where-Object { $_.name -ne $scheme.name }) + @($scheme)
         if (-not $settings.profiles) { $settings.profiles = @{} }
         if (-not $settings.profiles.defaults) { $settings.profiles.defaults = @{} }
-        $settings.profiles.defaults.colorScheme = 'Omarchy Blue'
+        $settings.profiles.defaults.colorScheme = 'WinP10k Aurora'
         if (-not $settings.profiles.defaults.font) { $settings.profiles.defaults.font = @{} }
         $settings.profiles.defaults.font.face = 'MesloLGM Nerd Font'
         $settings | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $settingsPath -Encoding utf8
@@ -97,4 +103,5 @@ if ($settingsPath) {
 }
 
 Write-Host 'Instalación lista. Reinicia Windows Terminal para cargar el tema y la fuente.'
+
 
