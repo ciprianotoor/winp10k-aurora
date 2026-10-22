@@ -2,7 +2,7 @@
 
 Tema de Oh My Posh para PowerShell y Windows Terminal, inspirado en la estructura de Powerlevel10k y adaptado a una paleta azul y blanca.
 
-Incluye prompt de dos líneas con entrada siempre a la izquierda, puntas simétricas, estado de Git y del último comando, duración, hora, batería, memoria, IP LAN y Tailscale. Las direcciones de red se calculan en el perfil local y el tema solo las muestra cuando están disponibles.
+Incluye prompt de dos líneas con entrada siempre a la izquierda, puntas simétricas, estado de Git y del último comando, duración, hora, batería, memoria, IP LAN y Tailscale. El perfil auxiliar obtiene todas las direcciones IPv4 con una sola consulta y actualiza las variables que muestra el tema.
 
 ## Requisitos
 
@@ -20,11 +20,11 @@ Desde PowerShell 7, en una ventana normal (sin administrador):
 
 El instalador instala Oh My Posh si falta, instala Meslo Nerd Font, copia el tema, agrega la inicialización al perfil de PowerShell 7 y configura el esquema azul en Windows Terminal cuando encuentra sus ajustes. Hace una copia del perfil antes de editarlo. Cierra y vuelve a abrir Windows Terminal al terminar.
 
-Para actualizar, ejecuta de nuevo el instalador. Para desinstalar la inicialización, ejecuta .\uninstall.ps1; el tema instalado se conserva para poder restaurarlo o quitarlo manualmente.
+Para actualizar, ejecuta de nuevo el instalador; también actualizará el perfil auxiliar de red y prompt. Para desinstalar la inicialización, ejecuta .\uninstall.ps1; el tema instalado se conserva para poder restaurarlo o quitarlo manualmente.
 
 ## Personalización
 
-Edita themes/winp10k-aurora.omp.json. Para cambiar LAN/Tailscale u otros datos, edita el bloque señalado en profile/WinP10k-Aurora.ps1. El perfil agregado es independiente: no reemplaza el perfil personal ni sus funciones.
+Edita themes/winp10k-aurora.omp.json. La lógica reutilizable del prompt y la detección LAN/Tailscale está en profile/WinP10k-Aurora.ps1. El perfil agregado es independiente: no reemplaza el perfil personal ni sus funciones de shell o Proxmox.
 
 ## Desarrollo
 
