@@ -48,7 +48,7 @@ foreach ($managedBlock in $managedBlocks) {
     }
 }
 $profileBackup = "$PROFILE.winp10k-aurora.bak"
-if (Test-Path -LiteralPath $PROFILE) {
+if ((Test-Path -LiteralPath $PROFILE) -and -not (Test-Path -LiteralPath $profileBackup)) {
     Copy-Item -LiteralPath $PROFILE -Destination $profileBackup -Force
 }
 $block = @"
@@ -73,6 +73,10 @@ $settingsCandidates = @(
 $settingsPath = $settingsCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 if ($settingsPath) {
     try {
+        $settingsBackup = "$settingsPath.winp10k-aurora.bak"
+        if (-not (Test-Path -LiteralPath $settingsBackup)) {
+            Copy-Item -LiteralPath $settingsPath -Destination $settingsBackup
+        }
         $settings = Get-Content -Raw -LiteralPath $settingsPath | ConvertFrom-Json -AsHashtable
         if (-not $settings.ContainsKey('schemes')) { $settings.schemes = @() }
         $scheme = @{
