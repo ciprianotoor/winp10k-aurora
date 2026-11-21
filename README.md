@@ -334,7 +334,7 @@ Comprueba primero que el cliente OpenSSH esté instalado y que el alias resuelva
 Get-Command ssh
 ssh -V
 Test-Path "$HOME\.ssh\config"
-ssh -G proxmox | Select-String '^(hostname|user|port) '
+ssh -G XX | Select-String '^(hostname|user|port) '
 ```
 
 Si `ssh` no existe, instala **OpenSSH Client** desde **Configuración > Sistema > Características opcionales > Ver características** y abre una nueva terminal. No necesitas instalar el servidor OpenSSH en Windows para conectarte a Proxmox.
@@ -342,19 +342,19 @@ Si `ssh` no existe, instala **OpenSSH Client** desde **Configuración > Sistema 
 Verifica que `$HOME\.ssh\config` tenga un bloque como este, sustituyendo host, usuario y puerto por los valores reales:
 
 ```sshconfig
-Host proxmox
-    HostName 192.168.1.10
-    User admin
-    Port 22
+Host XX
+    HostName XX
+    User XX
+    Port XX
 ```
 
-El nombre después de `Host` es el alias que escribes (`ssh proxmox`); `HostName` es la IP o DNS de Proxmox. El asistente conserva un alias ya existente y no lo reemplaza: si hay uno antiguo o duplicado, edita el archivo manualmente y vuelve a ejecutar `ssh -G proxmox` para revisar la configuración efectiva.
+El nombre después de `Host` es el alias que escribes (`ssh XX`); `HostName` es la IP o DNS de Proxmox. Sustituye los valores `XX` por los datos de tu equipo. El asistente conserva un alias ya existente y no lo reemplaza: si hay uno antiguo o duplicado, edita el archivo manualmente y vuelve a ejecutar `ssh -G XX` para revisar la configuración efectiva.
 
 Si el alias resuelve bien pero no conecta, comprueba que el host esté encendido y que el puerto SSH sea accesible:
 
 ```powershell
-Test-NetConnection 192.168.1.10 -Port 22
-ssh -vv proxmox
+Test-NetConnection XX -Port XX
+ssh -vv XX
 ```
 
 Un tiempo de espera suele indicar host apagado, IP incorrecta, ruta de red o puerto/firewall; `Connection refused` suele indicar que el host responde pero el servicio SSH no escucha en ese puerto. Si el error indica que cambió la identificación del host, verifica primero que la IP corresponde a tu Proxmox antes de corregir la entrada `known_hosts`; no elimines esa protección a ciegas. La configuración del cliente se explica en la [documentación de OpenSSH para Windows](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_config).
@@ -387,7 +387,7 @@ La opción 1 envía un paquete Wake-on-LAN al **servidor físico Proxmox** y lue
 3. Ejecuta el menú de Proxmox y elige la opción 1. El mensaje de paquete enviado solo confirma el envío local; espera hasta cinco minutos a que responda la interfaz web. Si el servidor ya está encendido, el envío no lo apaga: usa la opción SSH.
 4. Si el servidor responde pero una VM está apagada, entra a la interfaz web de Proxmox, selecciona la VM y pulsa **Start**. Para iniciar VMs automáticamente después del arranque del nodo, configura **Options > Start at boot** en cada VM, según corresponda.
 
-Si el nodo está encendido pero el asistente informa que no responde, verifica `HostAddress`, `WebPort` y acceso con `Test-NetConnection <IP-Proxmox> -Port 8006`. El puerto web predeterminado es 8006, pero puedes haber configurado otro. La opción SSH puede funcionar aunque la comprobación del puerto web falle si el puerto web está filtrado o usa otro puerto.
+Si el nodo está encendido pero el asistente informa que no responde, verifica `HostAddress`, `WebPort` y acceso con `Test-NetConnection XX -Port XX`. Sustituye ambos `XX` por la dirección y el puerto que configuraste. La opción SSH puede funcionar aunque la comprobación del puerto web falle si el puerto web está filtrado o usa otro puerto.
 
 ## Créditos
 
