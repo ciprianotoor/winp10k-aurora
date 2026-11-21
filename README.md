@@ -138,6 +138,9 @@ Quiero configurar WinP10k Aurora en esta computadora usando este repositorio.
 | zoxide | Navegación por historial de directorios | [Repositorio de zoxide](https://github.com/ajeetdsouza/zoxide) |
 | GitHub CLI | Operaciones de GitHub desde la terminal | [Instalación de GitHub CLI](https://cli.github.com/) |
 | Tailscale | Mostrar la IP Tailscale si está conectado | [Instalación de Tailscale](https://tailscale.com/download/windows) |
+| Midnight Commander | Gestor visual de archivos de dos paneles | [Proyecto oficial](https://midnight-commander.org/) |
+| Cliamp | Reproductor de música para terminal inspirado en Winamp | [Proyecto en GitHub](https://github.com/bjarneo/cliamp) |
+| GNU nano para Windows | Editor de texto para terminal | [Proyecto en GitHub](https://github.com/chawyehsu/nano-for-windows) |
 | Terminal-Icons | Iconos para archivos en PowerShell | [PowerShell Gallery](https://www.powershellgallery.com/packages/Terminal-Icons) |
 | PSFzf | Atajos de fzf en PSReadLine | [PowerShell Gallery](https://www.powershellgallery.com/packages/PSFzf) |
 | CompletionPredictor | Sugerencias predictivas; proyecto experimental | [Repositorio oficial](https://github.com/PowerShell/CompletionPredictor) |
@@ -169,9 +172,16 @@ Install-Module -Name CompletionPredictor -Repository PSGallery -Scope CurrentUse
 | Navegación de carpetas | zoxide | `ajeetdsouza.zoxide` |
 | Comandos de GitHub | GitHub CLI | `GitHub.cli` |
 | IP Tailscale en el prompt | Tailscale | `Tailscale.Tailscale` |
+| Gestor de archivos de dos paneles | Midnight Commander | `GNU.MidnightCommander` |
+| Reproductor de música para terminal | Cliamp | `Bjarneo.Cliamp` |
+| Editor de texto para terminal | GNU nano para Windows | `ChawyeHsu.Nano` |
 | OTP para el menú Proxmox | totp-cli | `yitsushi.totp-cli`; se ofrece al configurar Proxmox |
 
 Cada aplicación de esa tabla también tiene un enlace a su proyecto o instalador oficial en la tabla anterior. Algunas aplicaciones, como Tailscale, pueden solicitar elevación durante su propio instalador. El perfil omite las funciones asociadas si no instalas sus dependencias.
+
+### Bonus de consola: `mc`, Cliamp y nano
+
+La opción 2 de `setup.ps1` pregunta por cada herramienta por separado. Si aceptas, instala Midnight Commander (`GNU.MidnightCommander`), el reproductor de música Cliamp (`Bjarneo.Cliamp`) o GNU nano para Windows (`ChawyeHsu.Nano`) desde WinGet. No fija números de versión: WinGet instala la versión más reciente disponible en su catálogo. Después puedes abrirlos con `mc`, `cliamp` y `nano`, respectivamente. GNU Midnight Commander incluye su propio visor y editor de texto.
 
 ## Integración opcional con Proxmox y TOTP
 

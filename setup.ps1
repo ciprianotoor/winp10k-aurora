@@ -302,6 +302,9 @@ function Install-CommandLineTools {
         [PSCustomObject]@{ Name = 'zoxide'; Id = 'ajeetdsouza.zoxide' }
         [PSCustomObject]@{ Name = 'GitHub CLI'; Id = 'GitHub.cli' }
         [PSCustomObject]@{ Name = 'Tailscale'; Id = 'Tailscale.Tailscale' }
+        [PSCustomObject]@{ Name = 'Midnight Commander (gestor de archivos de dos paneles)'; Id = 'GNU.MidnightCommander' }
+        [PSCustomObject]@{ Name = 'Cliamp (reproductor de música para terminal)'; Id = 'Bjarneo.Cliamp' }
+        [PSCustomObject]@{ Name = 'GNU nano (editor de texto para terminal)'; Id = 'ChawyeHsu.Nano' }
     )
 
     foreach ($app in $apps) {
