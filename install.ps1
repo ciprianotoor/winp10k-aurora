@@ -16,20 +16,74 @@ $managedBlocks = @(
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 7) {
-    throw 'Ejecuta este instalador desde PowerShell 7 (pwsh).'
+    Write-Host 'PowerShell 7 or newer is required. This session is running an older version.'
+    $wingetAvailable = [bool](Get-Command winget -ErrorAction SilentlyContinue)
+    if ($wingetAvailable -and ((Read-Host 'Install PowerShell 7 with WinGet now? (y/n)') -match '^[YySs]')) {
+        winget install --exact --id Microsoft.PowerShell --source winget --accept-source-agreements --accept-package-agreements
+        if ($LASTEXITCODE -eq 0) { Write-Host 'Open a new PowerShell 7 session and run install.ps1 again.' }
+        else { Write-Warning "PowerShell 7 installation failed (exit code $LASTEXITCODE)." }
+    } else {
+        Write-Host 'Install PowerShell 7 with winget install --exact --id Microsoft.PowerShell, then reopen this installer in pwsh.'
+    }
+    throw 'Aurora installation stopped because this session is not PowerShell 7.'
 }
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
-    throw 'No se encontró winget. Instala App Installer desde Microsoft Store y vuelve a intentarlo.'
+    Write-Host 'WinGet is required. Install or update App Installer from Microsoft Store, then reopen PowerShell:'
+    Write-Host 'https://apps.microsoft.com/detail/9nblggh4nns1'
+    throw 'WinGet is missing; Aurora was not installed.'
 }
 
+if (-not (Test-Path -LiteralPath $themeSource)) { throw "Theme file is missing: $themeSource" }
+if (-not (Test-Path -LiteralPath $profileSource)) { throw "Profile file is missing: $profileSource" }
+
 if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
-    Write-Host 'Instalando Oh My Posh con winget...'
-    winget install --id JanDeDobbeleer.OhMyPosh --source winget --accept-source-agreements --accept-package-agreements
-    $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' +
-        [Environment]::GetEnvironmentVariable('Path', 'User')
+    Write-Host 'Requirement missing: Oh My Posh.'
+    if ((Read-Host 'Install Oh My Posh with WinGet now? (y/n)') -notmatch '^[YySs]') {
+        throw 'Install Oh My Posh and rerun install.ps1.'
+    }
+    winget install --exact --id JanDeDobbeleer.OhMyPosh --source winget --accept-source-agreements --accept-package-agreements
+    if ($LASTEXITCODE -ne 0) { throw "WinGet could not install Oh My Posh (exit code $LASTEXITCODE)." }
+    $machinePath = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+    $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+    $env:Path = (@($machinePath, $userPath) -join ';')
 }
 if (-not (Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
     throw 'Oh My Posh se instaló, pero no está disponible en esta sesión. Cierra PowerShell y vuelve a ejecutar install.ps1.'
+}
+Write-Host 'Requirement OK: Oh My Posh.'
+
+$fontRegistryPaths = @(
+    'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts',
+    'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts'
+)
+$mesloInstalled = $false
+foreach ($fontRegistryPath in $fontRegistryPaths) {
+    if (Test-Path -LiteralPath $fontRegistryPath) {
+        $fontProperties = Get-ItemProperty -LiteralPath $fontRegistryPath
+        if (($fontProperties.PSObject.Properties.Name -join "`n") -match 'Meslo.*Nerd') {
+            $mesloInstalled = $true
+            break
+        }
+    }
+}
+if (-not $mesloInstalled) {
+    Write-Host 'Requirement missing: Meslo Nerd Font (recommended for Aurora icons).'
+    if ((Read-Host 'Install Meslo Nerd Font with Oh My Posh now? (y/n)') -match '^[YySs]') {
+        & oh-my-posh font install meslo
+        if ($LASTEXITCODE -ne 0) { Write-Warning 'Font installation failed. Retry with: oh-my-posh font install meslo' }
+    } else {
+        Write-Warning 'Aurora can still be installed, but some symbols may display as squares.'
+    }
+} else {
+    Write-Host 'Requirement OK: Meslo Nerd Font.'
+}
+
+if (-not (Get-Command wt.exe -ErrorAction SilentlyContinue)) {
+    Write-Host 'Optional: Windows Terminal was not detected.'
+    if ((Read-Host 'Install Windows Terminal with WinGet now? (y/n)') -match '^[YySs]') {
+        winget install --exact --id Microsoft.WindowsTerminal --source winget --accept-source-agreements --accept-package-agreements
+        if ($LASTEXITCODE -ne 0) { Write-Warning 'Windows Terminal installation failed; continuing without its settings integration.' }
+    }
 }
 
 New-Item -ItemType Directory -Force -Path $themeDir | Out-Null

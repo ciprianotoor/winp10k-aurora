@@ -99,7 +99,9 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\setup.ps1
 ```
 
-El menú permite instalar el tema y la fuente, elegir herramientas de consola, elegir módulos de PowerShell, configurar Proxmox con TOTP y ajustar la privacidad del prompt. La opción 6 recorre todos los pasos y sigue preguntando antes de instalar cada herramienta o módulo.
+El menú comprueba los requisitos de Aurora y permite instalar Oh My Posh, Meslo Nerd Font y, opcionalmente, Windows Terminal paso a paso. También permite elegir herramientas de consola y módulos de PowerShell, configurar Proxmox con TOTP y ajustar la privacidad del prompt. La opción 6 recorre la configuración local y sigue preguntando antes de instalar cada herramienta o módulo.
+
+La opción 7 permite actualizar un clon limpio desde GitHub, iniciar sesión con una cuenta personal mediante GitHub CLI y configurar la identidad Git solo para este repositorio. Puede crear un fork personal si lo eliges. También ofrece revisar y publicar cambios: el staging es interactivo, muestra los remotos y pide confirmación antes de crear el commit y antes de hacer push. No descarta cambios locales y no publica nada automáticamente. La opción 8 muestra y puede copiar al portapapeles el [prompt para Codex o GitHub Copilot](PROMPT-CODEX-COPILOT.md).
 
 El perfil administrado carga los módulos opcionales si están instalados, activa las sugerencias de PSReadLine, configura los atajos de PSFzf y zoxide, y agrega los alias `ll`, `la`, `cat` y `grep` cuando sus herramientas están disponibles. Las funciones personales que ya existen en el perfil se conservan.
 
@@ -202,9 +204,19 @@ git pull
 .\install.ps1
 ```
 
+También puedes abrir `setup.ps1` y elegir la opción GitHub para actualizar el clon con `git pull --ff-only`. Si hay cambios locales, el asistente se detiene y muestra el estado; primero publica o guarda esos cambios. La opción de publicar permite seleccionar cambios con `git add -p`, revisar el resumen y confirmar el push al remoto elegido.
+
 Si lo instalaste desde un ZIP, descarga y extrae la versión nueva y vuelve a ejecutar `install.ps1`. El instalador reemplaza los archivos Aurora y actualiza su bloque marcado en el perfil.
 
 Para actualizar las herramientas o el módulo de Proxmox, ejecuta `setup.ps1` y vuelve a elegir el componente correspondiente. El instalador conserva el alias SSH existente.
+
+### Actualizar aplicaciones con `wingetactualiza`
+
+En este equipo, la función personal `wingetactualiza` actualiza las fuentes y luego ejecuta `winget upgrade --all --include-unknown` con elevación mediante `gsudo`. Si `gsudo` no está instalado, intenta instalarlo con WinGet antes de continuar.
+
+Si una actualización devuelve el error 1638 (hay otra versión del producto instalada), la función identifica el paquete que falló y lo desinstala y reinstala con su ID exacto de WinGet. Vuelve a ejecutar `wingetactualiza` para procesar cualquier otra actualización pendiente. Para otros códigos de error, muestra el resultado y se detiene sin desinstalar paquetes.
+
+La reinstalación puede afectar datos o configuración propios de la aplicación. Antes de usar esta recuperación, confirma que los datos importantes estén sincronizados o respaldados. Esta función personal no forma parte de `install.ps1`; el instalador conserva las funciones que ya existan en el perfil.
 
 ## Desinstalar
 
